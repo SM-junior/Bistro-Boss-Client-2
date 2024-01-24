@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=DM+Serif+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 .logo{
     font-family: 'Cinzel', serif;
@@ -7,7 +8,16 @@
 }
 
 .hand-item{
-    background-image: url('../assets/home/chef-service.jpg');
+    /* background-image: url('../assets/home/chef-service.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.contact{
+    font-family: 'Raleway', sans-serif;
+}
+.features{
+    background-image: url('../assets/home/featured.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

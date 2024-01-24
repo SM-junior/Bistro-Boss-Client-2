@@ -1,13 +1,15 @@
 import '../css/style.css'
 
-const HandItem = ({ title, description }) => {
+const HandItem = ({ title, description, bgImg, bg, text, opacity, height }) => {
     return (
-        <div className='hand-item my-4 py-10'>
-            <div className='text-center bg-white text-black w-[70%] mx-auto py-10'>
-                <h2 className='text-3xl uppercase logo'>{title}</h2>
-                <p>{description}</p>
+        <section>
+            <div style={{ backgroundImage: `url(${bgImg})` }} className={`${height} flex items-center justify-center hand-item mb-4 py-20`}>
+                <div className={`${bgImg} ${bg} ${text} ${opacity} text-center w-[70%] mx-auto py-10 px-6`}>
+                    <h2 className='text-3xl uppercase logo'>{title}</h2>
+                    <p>{description}</p>
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 

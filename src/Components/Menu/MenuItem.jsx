@@ -8,7 +8,7 @@ const MenuItem = ({item}) => {
                 <h2 className="text-xl">{name}---------------</h2>
                 <p className="text-[13px]">{recipe}</p>
             </div>
-            <p className="text-orange-500">{price}</p>
+            <p className="text-orange-500">${price}</p>
         </div>
     );
 };

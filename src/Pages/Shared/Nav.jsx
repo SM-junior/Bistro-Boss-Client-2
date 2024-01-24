@@ -1,14 +1,13 @@
+import { Link } from 'react-router-dom';
 import '../../css/style.css'
 const Nav = () => {
     const navigation = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
-        <li><a>Item 3</a></li>
-        <li><a>Item 3</a></li>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/ourMenu'>Our Menu</Link></li>
         <li><button className="btn">login</button></li>
     </>
     return (
-        <div className="navbar max-w-screen-xl mx-auto flex justify-between items-center fixed z-10 bg-opacity-35 bg-black text-white">
+        <div className="navbar max-w-screen-xl mx-auto flex justify-between items-center fixed z-10 bg-opacity-35 bg-black text-white mt-0">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
