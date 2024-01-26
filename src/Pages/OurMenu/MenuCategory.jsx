@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const MenuCategory = ({ item }) => {
+const MenuCategory = ({ item, title }) => {
     return (
         <section>
             <div className="grid md:grid-cols-2 gap-4 my-10 px-2 items-start justify-start">
@@ -17,7 +18,7 @@ const MenuCategory = ({ item }) => {
                     )
                 }
             </div>
-            <div className="text-center my-4"><button className="btn btn-outline border-x-0 border-t-0 border-b-2 mb-10 uppercase">view full menu</button></div>
+            <Link to={`/order/${title}`}><div className="text-center my-4"><button className="btn btn-outline border-x-0 border-t-0 border-b-2 mb-10 uppercase">Order your favourite food</button></div></Link>
         </section>
     );
 };

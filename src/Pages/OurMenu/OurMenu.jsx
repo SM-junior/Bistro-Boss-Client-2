@@ -47,7 +47,7 @@ const OurMenu = () => {
                 title='Desserts'
                 description='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
             ></HandItem>
-            <MenuCategory item={dessert}></MenuCategory>
+            <MenuCategory item={dessert} title={'dessert'}></MenuCategory>
             <HandItem
                 height='h-[400px]'
                 bg='bg-black'
@@ -57,7 +57,7 @@ const OurMenu = () => {
                 title='pizza'
                 description='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
             ></HandItem>
-            <MenuCategory item={pizza}></MenuCategory>
+            <MenuCategory item={pizza} title={'pizza'}></MenuCategory>
             <HandItem
                 height='h-[400px]'
                 bg='bg-black'
@@ -67,7 +67,7 @@ const OurMenu = () => {
                 title='salad'
                 description='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
             ></HandItem>
-            <MenuCategory item={salad}></MenuCategory>
+            <MenuCategory item={salad} title={'salad'}></MenuCategory>
             <HandItem
                 height='h-[400px]'
                 bg='bg-black'
@@ -77,7 +77,7 @@ const OurMenu = () => {
                 title='soup'
                 description='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
             ></HandItem>
-            <MenuCategory item={soup}></MenuCategory>
+            <MenuCategory item={soup} title={'soup'}></MenuCategory>
         </div>
     );
 };

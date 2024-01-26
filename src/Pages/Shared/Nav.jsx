@@ -4,6 +4,7 @@ const Nav = () => {
     const navigation = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/ourMenu'>Our Menu</Link></li>
+        <li><Link to='/order/salad'>Our Shop</Link></li>
         <li><button className="btn">login</button></li>
     </>
     return (
