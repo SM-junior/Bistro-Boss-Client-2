@@ -2,13 +2,26 @@ import React from 'react';
 import img1 from '../../assets/others/authentication2.png';
 import img2 from '../../assets/others/authentication.png';
 import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
+import { useContext } from 'react';
+import { authContext } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
-    const {
-        register, handleSubmit, formState: { errors }, } = useForm()
-    const onSubmit = (data) => console.log(data)
+    const {createUser}=useContext(authContext);
+    const navigate=useNavigate()
+
+    const {register, handleSubmit, formState: { errors }, } = useForm()
+    const onSubmit = (data) =>{
+        createUser(data.email, data.password)
+        .then(result=>{
+            console.log(result.user);
+            navigate('/')
+        })
+        .catch(error=>{
+            console.log(error.message);
+        })
+    }
 
     return (
         <div className="hero min-h-screen bg-base-200 bg" style={{ backgroundImage: `url(${img2})` }}>
