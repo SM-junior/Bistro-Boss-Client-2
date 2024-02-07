@@ -7,10 +7,11 @@ import { useForm } from "react-hook-form"
 import { useContext } from 'react';
 import { authContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { updateProfile } from 'firebase/auth';
 
 const SignUp = () => {
-    const { createUser } = useContext(authContext);
-    const navigate = useNavigate(); 
+    const { createUser,updateUserProfile } = useContext(authContext);
+    const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
@@ -18,13 +19,19 @@ const SignUp = () => {
     const onSubmit = (data) => {
         createUser(data.email, data.password)
             .then(result => {
-                Swal.fire({
-                    icon: "success",
-                    title: "SignUp successful",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate(from, { replace: true })
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "SignUp successful",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        navigate(from, { replace: true })
+                    })
+                    .catch(error=>{
+                        console.log(error.message);
+                    })
             })
             .catch(error => {
                 console.log(error.message);
@@ -68,6 +75,13 @@ const SignUp = () => {
                             {errors.password?.type === "minLength" && (<p className='text-red-600'>password must be at least 6 characters</p>)}
                             {errors.password?.type === "maxLength" && (<p className='text-red-600'>password must not be more than 12 characters</p>)}
                             {errors.password?.type === "pattern" && (<p className='text-red-600'>password must contain at least 1 uppercase, 1 lowercase, 1 special character, 1 number</p>)}
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo URL</span>
+                            </label>
+                            <input type="text" placeholder="photo URL" className="input input-bordered" {...register("photoURL", { required: true })} />
+                            {errors.photoURL && <span className='text-red-500'>Photo URL is required</span>}
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Sign Up</button>

@@ -4,13 +4,14 @@ import '../../css/style.css'
 import { authContext } from '../../Provider/AuthProvider';
 
 const Nav = () => {
-    const {user,logOut}=useContext(authContext);
-    const handleLogOut=()=>[
+    const { user, logOut } = useContext(authContext);
+    console.log(user);
+    const handleLogOut = () => [
         logOut()
-        .then(()=>{})
-        .catch(error=>{
-            console.log(error.message);
-        })
+            .then(() => { })
+            .catch(error => {
+                console.log(error.message);
+            })
     ]
 
     const navItems = <>
@@ -18,9 +19,16 @@ const Nav = () => {
         <li><Link to='/ourMenu'>Our Menu</Link></li>
         <li><Link to='/order/salad'>Our Shop</Link></li>
         {
-            user ? <><li><button onClick={handleLogOut} className='btn btn-sm'><Link>LogOut</Link></button></li></> 
-            :
-            <><li><button className='btn btn-sm'><Link to='/login'>Login</Link></button></li></>
+            user ?
+                <>
+                {/* <li><span>{user.displayName}</span></li> */}
+                <img className='w-12 h-12 rounded-full' src={user.photoURL} alt="" />
+                    <li><button onClick={handleLogOut} className='btn btn-sm ms-2'><Link>LogOut</Link></button></li>
+                </>
+                :
+                <>
+                    <li><button className='btn btn-sm'><Link to='/login'>Login</Link></button></li>
+                </>
         }
     </>
     return (
@@ -37,7 +45,7 @@ const Nav = () => {
                 <a className="text-center uppercase logo leading-[22px]"><span className='tracking-[1px] text-[32px]'>Bistro Boss</span><br /><span className='text-[18px] tracking-[10px] fond-light'>restaurant</span></a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 flex items-center justify-center">
                     {navItems}
                 </ul>
             </div>
