@@ -2,40 +2,50 @@ import React from 'react';
 import img1 from '../../assets/others/authentication2.png';
 import img2 from '../../assets/others/authentication.png';
 import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { authContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2'
+
 
 
 const Login = () => {
-    const [disabled, setDisabled]=useState(true);
-    const {loginUser}=useContext(authContext);
-    const navigate=useNavigate()
+    const [error,setError]=useState('')
+    const [disabled, setDisabled] = useState(true);
+    const { loginUser } = useContext(authContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
 
-    const handleLogin=(e)=>{
+    const handleLogin = (e) => {
         e.preventDefault()
-        const form=e.target;
-        const email=form.email.value;
-        const pass=form.password.value;
+        const form = e.target;
+        const email = form.email.value;
+        const pass = form.password.value;
         loginUser(email, pass)
-        .then(result=>{
-            navigate('/')
-            console.log(result.user);
-        })
-        .catch(error=>{
-            console.log(error.message);
-        })
+            .then(result => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Login successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                setError(error.message);
+            })
     }
 
-    const handleValidateCaptcha=(e)=>{
-        const user_captcha_value=e.target.value;
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
         if (validateCaptcha(user_captcha_value)) {
             setDisabled(false)
         }
@@ -72,6 +82,9 @@ const Login = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button disabled={disabled} className="btn btn-primary">Sign In</button>
+                        </div>
+                        <div>
+                            <p className='text-red-500'>{error}</p>
                         </div>
                     </form>
                     <div className='text-center'>

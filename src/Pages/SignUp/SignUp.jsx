@@ -2,25 +2,33 @@ import React from 'react';
 import img1 from '../../assets/others/authentication2.png';
 import img2 from '../../assets/others/authentication.png';
 import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import { useContext } from 'react';
 import { authContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-    const {createUser}=useContext(authContext);
-    const navigate=useNavigate()
+    const { createUser } = useContext(authContext);
+    const navigate = useNavigate(); 
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
-    const {register, handleSubmit, formState: { errors }, } = useForm()
-    const onSubmit = (data) =>{
+    const { register, handleSubmit, formState: { errors }, } = useForm()
+    const onSubmit = (data) => {
         createUser(data.email, data.password)
-        .then(result=>{
-            console.log(result.user);
-            navigate('/')
-        })
-        .catch(error=>{
-            console.log(error.message);
-        })
+            .then(result => {
+                Swal.fire({
+                    icon: "success",
+                    title: "SignUp successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     }
 
     return (
