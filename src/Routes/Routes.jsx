@@ -1,7 +1,9 @@
 import {
     createBrowserRouter,
   } from "react-router-dom";
+import Dashboard from "../Layout/Dashboard";
 import Main from "../Layout/Main";
+import MyCart from "../Pages/Dashboard/MyCart";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Order from "../Pages/Order/Order";
@@ -36,4 +38,14 @@ import PrivateRouter from './PrivateRouter/PrivateRouter';
         }
       ]
     },
+    {
+      path:'/dashboard',
+      element:<Dashboard></Dashboard>,
+      children:[
+        {
+          path:'/dashboard/mycart',
+          element:<MyCart></MyCart>
+        }
+      ]
+    }
   ]);

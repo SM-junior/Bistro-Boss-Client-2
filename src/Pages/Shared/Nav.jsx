@@ -8,7 +8,7 @@ import useCart from '../../hooks/useCart';
 const Nav = () => {
     const { user, logOut } = useContext(authContext);
     const [cart]=useCart();
-    console.log(user);
+
     const handleLogOut = () => [
         logOut()
             .then(() => { })
@@ -21,7 +21,7 @@ const Nav = () => {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/ourMenu'>Our Menu</Link></li>
         <li><Link to='/order/salad'>Our Shop</Link></li>
-        <li className='text-xl me-2'><Link><FaCartPlus /><sup>{cart.length}</sup></Link></li>
+        <li className='text-xl me-2 text-[#ff3f34]'><Link to='dashboard/mycart'><FaCartPlus /><sup className='font-semibold tracking-wide'>{cart.length}</sup></Link></li>
         {
             user ?
                 <>
