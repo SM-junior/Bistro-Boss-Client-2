@@ -7,10 +7,9 @@ import { useForm } from "react-hook-form"
 import { useContext } from 'react';
 import { authContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
-import { updateProfile } from 'firebase/auth';
 
 const SignUp = () => {
-    const { createUser,updateUserProfile } = useContext(authContext);
+    const { createUser,updateUserProfile,logOut } = useContext(authContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -27,7 +26,14 @@ const SignUp = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        navigate(from, { replace: true })
+                        logOut()
+                        .then(()=>{
+                            navigate(from, { replace: true })
+                        })
+                        .catch(error=>{
+                            console.log(error.message);
+                        })
+                        // navigate(from, { replace: true })
                     })
                     .catch(error=>{
                         console.log(error.message);

@@ -24,7 +24,7 @@ import PrivateRouter from './PrivateRouter/PrivateRouter';
         },
         {
           path:'/order/:category',
-          element:<PrivateRouter><Order></Order></PrivateRouter>
+          element:<Order></Order>
         },
         {
           path:'/login',

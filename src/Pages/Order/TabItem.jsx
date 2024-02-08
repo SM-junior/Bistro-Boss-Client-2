@@ -5,6 +5,7 @@ import useMenu from '../../hooks/useMenu';
 import ShopCard from './ShopCard';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ShopCategory from './ShopCategory';
 
 const TabItem = () => {
     const categories=['salad','pizza','soup','dessert','drinks'];
@@ -32,19 +33,19 @@ const TabItem = () => {
             </TabList>
 
             <TabPanel>
-                <ShopCard item={salad}></ShopCard>
+                <ShopCategory item={salad}></ShopCategory>
             </TabPanel>
             <TabPanel>
-                <ShopCard item={pizza}></ShopCard>
+                <ShopCategory item={pizza}></ShopCategory>
             </TabPanel>
             <TabPanel>
-                <ShopCard item={soup}></ShopCard>
+                <ShopCategory item={soup}></ShopCategory>
             </TabPanel>
             <TabPanel>
-                <ShopCard item={dessert}></ShopCard>
+                <ShopCategory item={dessert}></ShopCategory>
             </TabPanel>
             <TabPanel>
-                <ShopCard item={drinks}></ShopCard>
+                <ShopCategory item={drinks}></ShopCategory>
             </TabPanel>
         </Tabs>
     );
