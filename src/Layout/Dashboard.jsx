@@ -5,6 +5,7 @@ import { ImSpoonKnife } from "react-icons/im";
 import { AiOutlineBars } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import useCart from '../hooks/useCart';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = () => {
     const [cart] = useCart();
@@ -16,7 +17,10 @@ const Dashboard = () => {
     </>
     return (
         <div className="flex flex-col sm:flex-row w-full mx-auto min-h-screen bg-slate-100">
-            <div className="basis-1/5 bg-[#D1A054] cart-side">
+            <Helmet>
+                <title>Bistro Boss || Dashboard</title>
+            </Helmet>
+            <div className="basis-auto lg:basis-1/5 bg-[#D1A054] cart-side">
                 <NavLink className="btn btn-ghost uppercase logo my-6 text-left">
                     <h2 className="logo text-black">Bristo Boss <br /> <span className="text-[10px] restaurant">rastaurant</span></h2>
                 </NavLink>
@@ -34,7 +38,7 @@ const Dashboard = () => {
                                 <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='/' className='flex items-center'><span className='px-2'><FaHome></FaHome> </span> Home</NavLink></li>
                                 <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='reservation' className='flex items-center'><span className='px-2'><FaCalendarAlt></FaCalendarAlt> </span> Reservation</NavLink></li>
                                 <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='payment' className='flex items-center'><span className='px-2'><FaWallet></FaWallet> </span> Payment History</NavLink></li>
-                                <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='mycart' className='flex items-center'><span className='px-2'><FaShoppingCart></FaShoppingCart> </span> MyCart<sup><span className="text-[14px] text-white bg-slate-600 rounded-full px-1"> +{cart.length}</span></sup></NavLink></li>
+                                <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='mycart' className='flex items-center'><span className='px-2'><FaShoppingCart></FaShoppingCart> </span> MyCart<sup><span className="text-[14px] text-white rounded-full px-1"> {cart.length}</span></sup></NavLink></li>
                                 <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='review' className='flex items-center'><span className='px-2'><FaRankingStar></FaRankingStar> </span> Add Review</NavLink></li>
                                 <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='booking' className='flex items-center'><span className='px-2'><FaClipboardCheck></FaClipboardCheck> </span> My Booking</NavLink></li>
                             </>
@@ -46,7 +50,7 @@ const Dashboard = () => {
                     <li className='py-2 hover:bg-slate-500 hover:text-white'><NavLink to='/contact' className='flex items-center'><span className='px-2'><MdEmail></MdEmail> </span> Contact</NavLink></li>
                 </ul>
             </div>
-            <div className='mx-auto basis-3/4'>
+            <div className='mx-auto basis-3/4 bg-fixed'>
                 <Outlet></Outlet>
             </div>
         </div>
