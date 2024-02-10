@@ -3,6 +3,7 @@ import {
   } from "react-router-dom";
 import Dashboard from "../Layout/Dashboard";
 import Main from "../Layout/Main";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 import MyCart from "../Pages/Dashboard/MyCart";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -44,7 +45,11 @@ import PrivateRouter from './PrivateRouter/PrivateRouter';
       children:[
         {
           path:'/dashboard/mycart',
-          element:<MyCart></MyCart>
+          element:<PrivateRouter><MyCart></MyCart></PrivateRouter>
+        },
+        {
+          path:'/dashboard/allUsers',
+          element:<AllUsers></AllUsers>
         }
       ]
     }

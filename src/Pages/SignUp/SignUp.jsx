@@ -1,15 +1,15 @@
 import React from 'react';
 import img1 from '../../assets/others/authentication2.png';
 import img2 from '../../assets/others/authentication.png';
-import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import { useContext } from 'react';
 import { authContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogIn from '../SocialLogIn/SocialLogIn';
 
 const SignUp = () => {
-    const { createUser,updateUserProfile,logOut } = useContext(authContext);
+    const { createUser, updateUserProfile, logOut } = useContext(authContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -20,22 +20,34 @@ const SignUp = () => {
             .then(result => {
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        Swal.fire({
-                            icon: "success",
-                            title: "SignUp successful",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
+                        const user = { email: data.email, name: data.name }
+                        fetch('http://localhost:3000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(user)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "SignUp successful",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            })
                         logOut()
-                        .then(()=>{
-                            navigate(from, { replace: true })
-                        })
-                        .catch(error=>{
-                            console.log(error.message);
-                        })
-                        // navigate(from, { replace: true })
+                            .then(() => {
+                                navigate(from, { replace: true })
+                            })
+                            .catch(error => {
+                                console.log(error.message);
+                            })
                     })
-                    .catch(error=>{
+                    .catch(error => {
                         console.log(error.message);
                     })
             })
@@ -97,11 +109,7 @@ const SignUp = () => {
                         <Link to='/login'><p>Already registered? <span className='underline text-green-600 font-semibold hover:scale-125'>Go to log in</span></p></Link>
                         <p>Or sign up with</p>
                     </div>
-                    <div className='flex items-center justify-center py-5'>
-                        <Link className='flex items-center justify-center hover:scale-110 transition duration-400 ease-in-out mx-3 rounded-full h-[30px] w-[30px] border-t-red-700 border-b-red-700 border border-black'><FaFacebookF /></Link>
-                        <Link className='flex items-center justify-center hover:scale-110 transition duration-400 ease-in-out mx-3 rounded-full h-[30px] w-[30px] border-t-red-700 border-b-red-700 border border-black'><FaGoogle /></Link>
-                        <Link className='flex items-center justify-center hover:scale-110 transition duration-400 ease-in-out mx-3 rounded-full h-[30px] w-[30px] border-t-red-700 border-b-red-700 border border-black'><FaGithub /></Link>
-                    </div>
+                    <SocialLogIn></SocialLogIn>
                 </div>
             </div>
         </div>

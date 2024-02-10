@@ -1,7 +1,6 @@
 import React from 'react';
 import img1 from '../../assets/others/authentication2.png';
 import img2 from '../../assets/others/authentication.png';
-import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect } from 'react';
@@ -9,11 +8,10 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { authContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2'
-
-
+import SocialLogIn from '../SocialLogIn/SocialLogIn';
 
 const Login = () => {
-    const [error,setError]=useState('')
+    const [error, setError] = useState('')
     const [disabled, setDisabled] = useState(true);
     const { loginUser } = useContext(authContext);
     const navigate = useNavigate();
@@ -91,11 +89,7 @@ const Login = () => {
                         <Link to='/signup'><p>New here? <span className='underline text-green-600 font-semibold hover:scale-125'>Create a New Account</span></p></Link>
                         <p>Or sign in with</p>
                     </div>
-                    <div className='flex items-center justify-center py-5'>
-                        <Link className='flex items-center justify-center hover:scale-110 transition duration-400 ease-in-out mx-3 rounded-full h-[30px] w-[30px] border-t-red-700 border-b-red-700 border border-black'><FaFacebookF /></Link>
-                        <Link className='flex items-center justify-center hover:scale-110 transition duration-400 ease-in-out mx-3 rounded-full h-[30px] w-[30px] border-t-red-700 border-b-red-700 border border-black'><FaGoogle /></Link>
-                        <Link className='flex items-center justify-center hover:scale-110 transition duration-400 ease-in-out mx-3 rounded-full h-[30px] w-[30px] border-t-red-700 border-b-red-700 border border-black'><FaGithub /></Link>
-                    </div>
+                    <SocialLogIn></SocialLogIn>
                 </div>
             </div>
         </div>

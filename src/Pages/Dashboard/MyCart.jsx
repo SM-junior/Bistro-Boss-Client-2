@@ -21,20 +21,20 @@ const MyCart = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/carts/${item._id}`,{
-                    method:'DELETE'
+                fetch(`http://localhost:3000/carts/${item._id}`, {
+                    method: 'DELETE'
                 })
-                .then(res=>res.json())
-                .then(data=>{
-                    if(data.deletedCount>0){
-                        refetch()
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                    }
-                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
             }
         });
     }
