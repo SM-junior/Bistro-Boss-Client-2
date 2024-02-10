@@ -28,7 +28,7 @@ const Login = () => {
         const email = form.email.value;
         const pass = form.password.value;
         loginUser(email, pass)
-            .then(result => {
+            .then(() => {
                 Swal.fire({
                     icon: "success",
                     title: "Login successful",
@@ -75,11 +75,12 @@ const Login = () => {
                         <div className="form-control">
                             <LoadCanvasTemplate />
                         </div>
-                        <div className="form-control">
+                        {/* <div className="form-control">
                             <input onBlur={handleValidateCaptcha} type="text" placeholder="type here" className="input input-bordered" required />
-                        </div>
+                        </div> */}
+                        {/* TODO: make sign In button disabled */}
                         <div className="form-control mt-6">
-                            <button disabled={disabled} className="btn btn-primary">Sign In</button>
+                            <button disabled={false} className="btn btn-primary">Sign In</button>
                         </div>
                         <div>
                             <p className='text-red-500'>{error}</p>

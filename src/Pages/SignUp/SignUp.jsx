@@ -17,7 +17,7 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm()
     const onSubmit = (data) => {
         createUser(data.email, data.password)
-            .then(result => {
+            .then(() => {
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         const user = { email: data.email, name: data.name }

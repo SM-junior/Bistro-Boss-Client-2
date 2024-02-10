@@ -14,7 +14,6 @@ const SocialLogIn = () => {
     const logInWithGoogle = () => {
         googleLogin()
             .then(result => {
-                console.log(result);
                 const user = { email: result.user.email, name: result.user.displayName }
                 fetch('http://localhost:3000/users', {
                     method: 'POST',
@@ -24,7 +23,7 @@ const SocialLogIn = () => {
                     body: JSON.stringify(user)
                 })
                     .then(res => res.json())
-                    .then(data => {
+                    .then(() => {
                         navigate(from, { replace: true })
                     })
             })

@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { FaUsers } from "react-icons/fa";
+import Swal from 'sweetalert2';
+
 import SectionTitle from '../../Components/SectionTitle';
 
 const AllUsers = () => {
@@ -14,7 +17,39 @@ const AllUsers = () => {
     })
 
     const handleUserDelete = (user) => {
-        console.log(user._id);
+        fetch(`http://localhost:3000/users/${user._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        icon: "success",
+                        title: 'User successfully deleted!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
+    const handleAdmin = (user) => {
+        fetch(`http://localhost:3000/users/admin/${user._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        icon: "success",
+                        title: `${user.name} is an admin now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
 
     return (
@@ -44,7 +79,11 @@ const AllUsers = () => {
                                         <th>{index + 1}</th>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
-                                        <td></td>
+                                        <td>
+                                            {user.role === 'admin' ? 'admin' :
+                                                <button onClick={() => handleAdmin(user)} className="btn btn-sm bg-[#D1A054] text-black text-lg rounded-md hover:scale-125"><FaUsers></FaUsers></button>
+                                            }
+                                        </td>
                                         <td><button onClick={() => handleUserDelete(user)} className="bg-rose-700 hover:bg-red-500 text-white text-lg p-2 rounded-md hover:scale-125"><FaRegTrashAlt></FaRegTrashAlt></button></td>
                                     </tr>
                                 )
