@@ -4,6 +4,7 @@ import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { authContext } from '../../Provider/AuthProvider';
+import { useState } from 'react';
 
 const SocialLogIn = () => {
     const { googleLogin } = useContext(authContext)

@@ -6,10 +6,12 @@ import { AiOutlineBars } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import useCart from '../hooks/useCart';
 import { Helmet } from 'react-helmet-async';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
     const [cart] = useCart();
     const isAdmin = true;
+    // const [isAdmin]=useAdmin()
 
     const navAndSideBar = <>
         <li><a>Navbar Item 1</a></li>
